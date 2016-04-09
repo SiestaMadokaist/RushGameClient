@@ -1,0 +1,11 @@
+{
+  "name": "VODUploader",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./config.js",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "PaymentGateway",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./payment_gateway_view.js",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}

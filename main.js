@@ -90,10 +90,20 @@ class App extends React.Component {
     playCard(cardId){
         const url = Config.resources("/rooms/play");
         const roomId = this.state.roomState.id;
+        const callback = (response) => {
+            const roomState = response.body;
+            if(roomId == roomState.data.id){
+                setTimeout(() => {
+                    this.playCard(cardId)
+                }, 500)
+            }else{
+                this.updateRoomStateFromResponse(response);
+            }
+        }
         Request
             .post(url)
             .send({room_id: roomId, card_id: cardId})
-            .then(this.updateRoomStateFromResponse.bind(this))
+            .then(callback.bind(this))
     }
 
     playerPoint(){

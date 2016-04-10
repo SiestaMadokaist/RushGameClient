@@ -55,10 +55,35 @@ class App extends React.Component {
             .then(this.rollbackRoomState.bind(this))
     }
 
-    newRoom() {
+    newDeterministicRoom() {
         const url = Config.resources("/rooms/create");
         const room = Request
             .post(url)
+            .send({algorithm: "deterministic"})
+            .then(this.updateRoomStateFromResponse.bind(this));
+    }
+
+    newRandomRoom(){
+        const url = Config.resources("/rooms/create");
+        const room = Request
+            .post(url)
+            .send({algorithm: "purerandom"})
+            .then(this.updateRoomStateFromResponse.bind(this));
+    }
+
+    newRouletteRoom() {
+        const url = Config.resources("/rooms/create");
+        const room = Request
+            .post(url)
+            .send({algorithm: "roulette"})
+            .then(this.updateRoomStateFromResponse.bind(this));
+    }
+
+    newDeterministic2Room(){
+        const url = Config.resources("/rooms/create");
+        const room = Request
+            .post(url)
+            .send({algorithm: "deterministic2"})
             .then(this.updateRoomStateFromResponse.bind(this));
     }
 
@@ -120,8 +145,16 @@ class App extends React.Component {
                 {this.aiPointUI()}
             </div>
             <div className="wrapper">
-                <RushGamePlayer challenger={this.state.roomState.challenger} isClosed={this.state.isClosed} onStartButtonClicked={this.newRoom.bind(this)} onPlayButtonClicked={this.playCard.bind(this)} onRollbackButtonClicked={this.rollback.bind(this)}/>
-                <RushGameNetral storage={this.state.roomState.storage} currentCard={this.state.roomState.com_card}/>
+                <RushGamePlayer challenger={this.state.roomState.challenger} isClosed={this.state.isClosed} onPlayButtonClicked={this.playCard.bind(this)} onRollbackButtonClicked={this.rollback.bind(this)}/>
+                <div className="netral-area">
+                    Current Card: {this.state.roomState.com_card}<br/><br/>
+                    Current Storage: {this.state.roomState.storage}<br/><br/>
+                    Playing Against <b>{this.state.roomState.algorithm_name}</b>
+                    <RushGameNetral onStartButtonClicked={this.newDeterministicRoom.bind(this)} buttonValue="start deterministic"/>
+                    <RushGameNetral onStartButtonClicked={this.newDeterministic2Room.bind(this)} buttonValue="start deterministic2"/>
+                    <RushGameNetral onStartButtonClicked={this.newRouletteRoom.bind(this)} buttonValue="start roulette"/>
+                    <RushGameNetral onStartButtonClicked={this.newRandomRoom.bind(this)} buttonValue="start pure-random"/>
+                </div>
                 <RushGameAI ai={this.state.roomState.ai} />
             </div>
         </div>

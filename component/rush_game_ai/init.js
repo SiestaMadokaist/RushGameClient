@@ -8,7 +8,6 @@ class RushGamePlayer extends React.Component {
 
     ammo(){
         const _default = [1, 2, 3, 4, 5, 6]
-        console.log(this.props)
         if(this.props.ai == undefined) { return _default}
         if(this.props.ai.ammo == undefined) { return _default}
         return this.props.ai.ammo;

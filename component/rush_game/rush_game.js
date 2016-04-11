@@ -22,9 +22,17 @@ class RushGamePlayer extends React.Component {
         this.props.onPlayButtonClicked(event.target.value);
     }
 
+    classNameForCard(i){
+        if(this.ammo().indexOf(i) == -1){
+            return <input type="button" value={i} className="btn btn-sm btn-default play-button centered" disabled></input>
+        }else{
+            return <input type="button" value={i} className="btn btn-sm btn-primary centered play-button" onClick={this.playCard.bind(this)}></input>
+        }
+    }
+
     initialUI(){
-        return this.ammo()
-            .map((i) => <input type="button" value={i} className="btn btn-sm btn-primary play-button" onClick={this.playCard.bind(this)}></input>)
+        return [1,2,3,4,5,6]
+            .map(this.classNameForCard.bind(this))
     }
 
     closed(){

@@ -7,22 +7,19 @@ class RushGamePlayer extends React.Component {
     }
 
     ammo(){
-        const _default = [1, 2, 3, 4, 5, 6]
+        const _default = [];
         if(this.props.ai == undefined) { return _default}
         if(this.props.ai.ammo == undefined) { return _default}
         return this.props.ai.ammo;
     }
 
+
     classNameForCard(i){
-        if(this.ammo().indexOf(i) == -1){
-            return <input type="button" value={i} className="btn btn-sm btn-warning play-button" disabled></input>
-        }else{
-            return <input type="button" value={i} className="btn btn-sm btn-info play-button" disabled></input>
-        }
+        return <input type="button" value={i} className="btn btn-sm btn-primary play-button centered"></input>
     }
 
     initialUI(){
-        return [1,2,3,4,5,6]
+        return this.ammo()
             .map(this.classNameForCard.bind(this))
     }
 
@@ -36,7 +33,7 @@ class RushGamePlayer extends React.Component {
         return <div className="player-hand">
             <div className="player-hand-header">
                 Current Score: {this.score()} <br></br>
-                Available Cards
+                AI previous card:
                 {this.initialUI()}
             </div>
         </div>

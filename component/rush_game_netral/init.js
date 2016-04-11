@@ -8,7 +8,7 @@ class RushGameNetral extends React.Component {
 
     startButton(){
         const style = {marginTop: 10, width: 120}
-            return <input type="button" value={this.props.buttonValue} className="btn btn-sm btn-primary play-button centered" style={style} onClick={this.props.onStartButtonClicked}></input>
+            return <input type="button" value={this.props.buttonValue} className="btn btn-sm btn-success play-button centered" style={style} onClick={this.props.onStartButtonClicked}></input>
     }
 
     render(){

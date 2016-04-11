@@ -147,6 +147,14 @@ class App extends React.Component {
         </div>
     }
 
+    currentCard(){
+        return <input type="button" value={this.state.roomState.com_card} className="btn btn-sm btn-default play-button centered" disabled></input>
+    }
+
+    currentStorage(){
+        return <input type="button" value={this.state.roomState.storage} className="btn btn-sm btn-default play-button centered" disabled></input>
+    }
+
     render(){
         return <div className="view-wrapper">
             <div className="point-bar">
@@ -157,8 +165,11 @@ class App extends React.Component {
             <div className="wrapper">
                 <RushGamePlayer challenger={this.state.roomState.challenger} isClosed={this.state.isClosed} onPlayButtonClicked={this.playCard.bind(this)} onRollbackButtonClicked={this.rollback.bind(this)}/>
                 <div className="netral-area">
-                    Current Card: {this.state.roomState.com_card}<br/><br/>
-                    Current Storage: {this.state.roomState.storage}<br/><br/>
+                    Current Card:
+                    {this.currentCard()}
+                    Current Storage:
+                    {this.currentStorage()}
+                    <br/>
                     Playing Against <b>{this.state.roomState.algorithm_name}</b>
                     <RushGameNetral onStartButtonClicked={this.newDeterministicRoom.bind(this)} buttonValue="start deterministic"/>
                     <RushGameNetral onStartButtonClicked={this.newDeterministic2Room.bind(this)} buttonValue="start deterministic2"/>
